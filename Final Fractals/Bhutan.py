@@ -5,13 +5,10 @@ import turtle
 myTurtle = turtle.Turtle()
 myTurtle.hideturtle()
 ts = turtle.Screen()
-print(myTurtle.position())
-print(ts.window_width())
-print(ts.window_height())
 myTurtle.speed(10)
 
-instructions = ['a','d','a','d','a']
-layer = 2
+instructions = ['a', 'd', 'a', 'd', 'a']
+layer = 3
 for depth in range(layer):
     for index, letter in enumerate(instructions):
         if letter == 'a':
@@ -24,10 +21,9 @@ for depth in range(layer):
             instructions[index] = 'i'
         elif letter == 'i':
             instructions[index] = 'g'
-        elif letter == 'g':
-            instructions[index] = 'h'
 
-    flattened_instructions = [item for sublist in instructions for item in sublist]
+    flattened_instructions = [
+        item for sublist in instructions for item in sublist]
     instructions = flattened_instructions
 
 print(instructions)
@@ -43,17 +39,22 @@ for letter in instructions:
         myTurtle.right(120)
     # first and third bend
     if letter == 'e':
-        myTurtle.left(48)
+        e = 180 - (114 + (2 * 9 * (layer - 1)))
+        myTurtle.left(e)
+        print('e', e)
+        # myTurtle.left(48)
+    # middle bend
     if letter == 'f':
-        myTurtle.right(132)
+        f = 180 - (66 - (2 * 9 * (layer - 1)))
+        myTurtle.right(f)
+        print('f', f)
+        # myTurtle.right(132)
     if letter == 'i':
         myTurtle.left(102)
+    # triangle level 2
     if letter == 'g':
-        g = 180 - ((9 * 2 * layer) + 60)
-        myTurtle.left(g)
-    if letter == 'h':
-        g = 180 - ((18 * layer) + 60)
-        myTurtle.left(g)
-
+        # Only valid for layer 3
+        myTurtle.left(42)
+print(layer)
 
 ts.exitonclick()
